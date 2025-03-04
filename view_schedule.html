@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}{{ schedule.title }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h2>{{ schedule.title }}</h2>
+        <p class="text-muted">Created on {{ schedule.created_at.strftime('%Y-%m-%d %H:%M') }}</p>
+    </div>
+    <div class="col-auto">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Time</th>
+                        <th scope="col">Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in schedule.content.schedule %}
+                    <tr>
+                        <td class="time-slot">{{ item.time }}</td>
+                        <td>{{ item.activity }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
